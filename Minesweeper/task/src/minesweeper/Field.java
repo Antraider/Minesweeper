@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Field {
     Cell[][] field = new Cell[9][9];
+    boolean isEnd = false;
 
     public Field(int mines){
 
@@ -53,8 +54,9 @@ public class Field {
                         count++;
                     } // check right-down corner
                     if (count > 0) {
-                        cell[i][j].symbol = (char)(count + '0');
+                        cell[i][j].setMinesFound(count);
                     }
+
                 }
             }
         }
@@ -63,12 +65,22 @@ public class Field {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(" |123456789|\n" +
+                "-|---------|\n");
         for (int i = 0; i < 9; i++) {
+            builder.append(i+1).append("|");
             for (int j = 0; j < 9; j++) {
-                builder.append(field[i][j].symbol);
+                if (field[i][j].isFlagged()) {
+                    builder.append('*');
+                } else if (field[i][j].getMinesFound() > 0) {
+                    builder.append(field[i][j].getMinesFound());
+                } else {
+                    builder.append('.');
+                }
             }
-            builder.append("\n");
+            builder.append("|\n");
         }
+        builder.append("-|---------|");
         return builder.toString();
     }
 }
