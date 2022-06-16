@@ -3,8 +3,17 @@ package minesweeper;
 public class Cell {
     private boolean isMine = false;
     private boolean isFlagged = false;
+    private boolean isOpened = false;
     private int minesFound = 0;
 
+
+    public boolean isOpened() {
+        return isOpened;
+    }
+
+    public void setOpened(boolean opened) {
+        isOpened = opened;
+    }
 
     public boolean isMine() {
         return isMine;
